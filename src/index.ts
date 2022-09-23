@@ -3,12 +3,14 @@ import chalk from "chalk";
 
 import signup from './routes/signup';
 
-import connect from "./db";
 import { SERVER_PORT } from "./config";
 
 const app = express();
 
-connect();
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 
 app.use('/signup', signup);
 
