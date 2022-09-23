@@ -1,9 +1,9 @@
 import { getModelForClass, prop } from "@typegoose/typegoose";
-import mongoose from "mongoose";
-import uniqueValidator from 'mongoose-unique-validator';
+import { ObjectId } from "mongoose";
 import { providerTypes, roles } from "../db/enums";
 
 export class User {
+    public _id?: ObjectId;
     
     @prop({ required: true })
     public name!: string;
@@ -20,7 +20,7 @@ export class User {
     @prop ({ default: roles.person})
     public role!:  roles;
 
-    @prop({  })
+    @prop({})
     public provider_type!: providerTypes
 }
 
