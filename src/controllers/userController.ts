@@ -27,6 +27,8 @@ export const addUser = async (user: User) => {
 
 
 export const getUser = async (email: String): Promise<User | null> => {
+    await connect();
+    
     const found: User | null = await userModel.findOne({ email });
 
     return found;
