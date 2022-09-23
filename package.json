@@ -21,6 +21,8 @@
   "homepage": "https://github.com/luisFelipeEvilla/GLAP-API#readme",
   "dependencies": {
     "@typegoose/typegoose": "^9.12.0",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "chalk": "^4.1.2",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
