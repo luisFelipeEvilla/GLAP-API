@@ -6,6 +6,7 @@ import reports from './routes/report';
 
 import { SERVER_PORT } from "./config";
 import { errorHandler } from "./middlewares/errorHandler";
+import verifyToken from "./middlewares/auth";
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.urlencoded({
 app.use(errorHandler);
 
 app.use('/auth', signup);
-app.use('/reports', reports);
+app.use('/reports', verifyToken ,reports);
 
 app.listen(SERVER_PORT, () => {
     console.log(chalk.green(`Server listening on ${SERVER_PORT}`));
