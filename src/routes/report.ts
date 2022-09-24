@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { createReport, deleteReports, getReports, updateReports } from '../controllers/reportController';
-import { Report } from '../models/reportModel';
+import { createReport, createReportSolucionated, deleteReports, getReports, updateReports } from '../controllers/reportController';
+import { Report } from '../models/report/reportModel';
+import { ReportSolutionated } from '../models/report/reportSolucionated';
 
 const router = express.Router();
 
@@ -15,6 +16,18 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 })
+
+router.post('/:_id/solutionated', async (req: Request, res: Response, next: NextFunction) => {
+    const {...solutionated} = req.body as ReportSolutionated;
+
+    try {
+        const result = await createReportSolucionated(solutionated);
+
+        res.json(result).status(200);
+    } catch (error) {
+        next(error);
+    }
+});
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     const {...report} = req.body as Report;

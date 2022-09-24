@@ -1,6 +1,6 @@
 import { getModelForClass, ModelOptions, prop, Ref, Severity } from "@typegoose/typegoose";
-import { ObjectId } from "mongoose";
-import { User } from "./userModel";
+import  { ObjectId } from "mongoose";
+import { User } from "../userModel";
 
 @ModelOptions({options: {allowMixed: Severity.ALLOW}})
 export class Report {
