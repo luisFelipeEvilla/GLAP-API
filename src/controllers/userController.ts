@@ -6,9 +6,9 @@ import userModel, { User } from "../models/userModel";
 
 
 export const addUser = async (user: User) => {
-    await connect();
-
     try {
+        await connect();
+        
         const found = await getUser(user.email);
 
         if (found) throw new ResourceAlreadyExistsError(`Error, user ${user.email} already exists`);

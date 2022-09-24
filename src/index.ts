@@ -2,6 +2,7 @@ import express from "express";
 import chalk from "chalk";
 
 import signup from './routes/auth';
+import reports from './routes/report';
 
 import { SERVER_PORT } from "./config";
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({
 }))
 
 app.use('/auth', signup);
+app.use('/reports', reports);
 
 app.listen(SERVER_PORT, () => {
     console.log(chalk.green(`Server listening on ${SERVER_PORT}`));
