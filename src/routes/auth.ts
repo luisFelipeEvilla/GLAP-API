@@ -9,30 +9,38 @@ import generateToken from "../utils/generateJWT";
 const router = express.Router();
 
 router.post('/signup', async (req: Request, res: Response, next: NextFunction) => {
-    const {...user} =  req.body as User; // parse req.body to user object
+    const {...data} =  req.body as User; // parse req.body to user object
 
     try {
-        const result = await addUser(user);
+        const user = await addUser(data);
+
+        user.password = "";
 
         const token = generateToken(user);
 
-        res.json(token).status(200);
+        res.json({user, token}).status(200);
     } catch (error) {     
         next(error);
     }
 })
 
 router.post('/signin', async (req: Request, res: Response, next: NextFunction) => {
-    const {...user} =  req.body as User;
+    const {...data} =  req.body as User;
 
     try {
-        const found = await getUser(user.email);
+        const user = await getUser(data.email);
         
-        if (!found) return res.json({error: `User with email ${user.email} not found`}).status(404);
+        if (!user) return res.json({error: `User with email ${data.email} not found`}).status(404);
         
-        const passwordMatch = compareSync(user.password, found.password);
+        const passwordMatch = compareSync(data.password, user.password);
         
-        passwordMatch ? res.json(generateToken(found)) : res.json({error: `Wrong credentials`}).status(400);
+        if (!passwordMatch) return res.json({error: `Wrong credentials`}).status(400);
+
+        const token = generateToken(user);
+        user.password = "";
+
+        return res.send({user, token});
+
     } catch (error) {
         next(error);
     }
