@@ -2,7 +2,7 @@ import express from "express";
 import chalk from "chalk";
 
 import signup from './routes/auth';
-import reports from './routes/report';
+import reports from './routes/reports/report';
 
 import { SERVER_PORT } from "./config";
 import { errorHandler } from "./middlewares/errorHandler";
