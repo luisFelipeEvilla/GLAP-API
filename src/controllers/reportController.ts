@@ -1,11 +1,12 @@
 import connect from "../db";
 import reportModel, { Report } from "../models/reportModel";
+import { DEFAULT_OFFSET } from "../config";
 
 connect();
 
-export const getReports = async (filters = {} ) => {
+export const getReports = async (filters = {}, index: number, offset = DEFAULT_OFFSET) => {
     try {
-        const result = await reportModel.find(filters);
+        const result = await reportModel.find(filters).skip(index * offset).limit(offset);
 
         return result;
     } catch (error) {
@@ -13,12 +14,12 @@ export const getReports = async (filters = {} ) => {
     }
 }
 
-export const createReport = async(report: Report) => {
+export const createReport = async (report: Report) => {
     try {
-        const result = await reportModel.create(report); 
-        
+        const result = await reportModel.create(report);
+
         if (!result) throw new Error(`Error creating report`);
-        
+
         return result;
     } catch (error) {
         if (error instanceof Error) throw error;
@@ -35,7 +36,7 @@ export const deleteReports = async (filters: {}) => {
     }
 }
 
-export const updateReports = async (filters: {} , report: Report) => {
+export const updateReports = async (filters: {}, report: Report) => {
     try {
         const result = await reportModel.updateMany(filters, report);
 
