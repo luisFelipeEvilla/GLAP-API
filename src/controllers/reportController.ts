@@ -3,6 +3,7 @@ import reportModel, { Report } from "../models/report/reportModel";
 import { DEFAULT_OFFSET } from "../config";
 import reportSolutionatedModdel, { ReportSolutionated } from "../models/report/reportSolucionated";
 import { ObjectId } from "mongoose";
+import ReportConfirmationModel, { ReportConfirmation } from "../models/report/reportConfirmation";
 
 connect();
 
@@ -80,6 +81,28 @@ export const createReportSolucionated = async (reportSolucionated: ReportSolutio
 export const deleteReportSolucionated = async (filters: {}) => {
     try {
         const result = await reportSolutionatedModdel.deleteMany(filters);
+
+        return result.deletedCount;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// report confirmation
+
+export const createReportConfirmation = async (confirmation: ReportConfirmation) => {
+    try {
+        const result = await ReportConfirmationModel.create(confirmation);
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleteReportConfirmation = async (filters: {}) => {
+    try {
+        const result = await ReportConfirmationModel.deleteMany(filters);
 
         return result.deletedCount;
     } catch (error) {

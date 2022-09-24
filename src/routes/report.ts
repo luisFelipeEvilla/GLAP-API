@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { createReport, createReportSolucionated, deleteReports, deleteReportSolucionated, getReports, updateReports } from '../controllers/reportController';
+import { createReport, createReportConfirmation, createReportSolucionated, deleteReports, deleteReportSolucionated, getReports, updateReports } from '../controllers/reportController';
+import { ReportConfirmation } from '../models/report/reportConfirmation';
 import { Report } from '../models/report/reportModel';
 import { ReportSolutionated } from '../models/report/reportSolucionated';
 
@@ -16,6 +17,30 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 })
+router.post('/:_id/confirmation', async (req: Request, res: Response, next: NextFunction) => {
+    const {...confirmation} = req.body as ReportConfirmation;
+
+    try {
+        const result = await createReportConfirmation(confirmation);
+
+        res.json(result).status(200);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.delete('/:_id/confirmation/:_idConfirmation', async (req, res, next) => {
+    const { _idConfirmation } = req.params;
+
+    try {
+        const result = await deleteReportSolucionated({_id: _idConfirmation});
+        
+        res.json(result).status(200);
+    } catch (error) {
+        next(error);
+    }
+})
+
 
 router.post('/:_id/solutionated', async (req: Request, res: Response, next: NextFunction) => {
     const {...solutionated} = req.body as ReportSolutionated;
@@ -81,4 +106,5 @@ router.patch('/:_id', async (req: Request, res: Response, next: NextFunction) =>
         next(error);
     }
 })
+
 export default router;
