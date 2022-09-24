@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - $SERVER_PORT:$SERVER_PORT
+    environment:
+      - SERVER_PORT=$SERVER_PORT
+      - DB_URI=$DB_URI
+    tty: true
+      
