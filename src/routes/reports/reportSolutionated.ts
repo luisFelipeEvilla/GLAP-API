@@ -5,6 +5,7 @@ import { ReportSolutionated } from '../../models/report/reportSolucionated';
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
+    /* #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/reportSolutionated" } } */
     const {...solutionated} = req.body as ReportSolutionated;
 
     try {

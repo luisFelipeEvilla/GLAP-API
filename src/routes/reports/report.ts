@@ -23,6 +23,8 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
+    /* #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/report" } } */
+
     const {...report} = req.body as Report;
 
     try {
@@ -49,6 +51,7 @@ router.delete('/:_id', async (req: Request, res: Response, next: NextFunction) =
 })
 
 router.patch('/:_id', async (req: Request, res: Response, next: NextFunction) => {
+    /* #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/report" } } */
     const { _id } = req.params;
     const { ...report } = req.body as Report;
 

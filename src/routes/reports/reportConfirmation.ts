@@ -5,6 +5,8 @@ import { ReportConfirmation } from "../../models/report/reportConfirmation";
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
+    /*#swagger.requestBody = { required: true, schema: { $ref: "#/definitions/reportConfirmation" } } */
+
     const {...confirmation} = req.body as ReportConfirmation;
 
     try {

@@ -1,45 +1,45 @@
 import { compareSync } from "bcrypt";
 import express, { NextFunction, Request, Response } from "express";
-import { Error as mongooseError } from "mongoose";
 import { addUser, getUser } from "../controllers/userController";
-import { ResourceAlreadyExistsError } from "../Errors/errors";
 import { User } from "../models/userModel";
 import generateToken from "../utils/generateJWT";
 
 const router = express.Router();
 
+
 router.post('/signup', async (req: Request, res: Response, next: NextFunction) => {
-    const {...data} =  req.body as User; // parse req.body to user object
-
+    /* #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/user" } } */
+    const { ...user } = req.body as User; // parse req.body to user object
+    
     try {
-        const user = await addUser(data);
+        const result = await addUser(user);
 
-        user.password = "";
+        result.password = "";
 
-        const token = generateToken(user);
+        const token = generateToken(result);
 
-        res.json({user, token}).status(200);
-    } catch (error) {     
+        res.json({ result, token }).status(200);
+    } catch (error) {
         next(error);
     }
 })
 
 router.post('/signin', async (req: Request, res: Response, next: NextFunction) => {
-    const {...data} =  req.body as User;
+    const { email, password } = req.body;
 
     try {
-        const user = await getUser(data.email);
-        
-        if (!user) return res.json({error: `User with email ${data.email} not found`}).status(404);
-        
-        const passwordMatch = compareSync(data.password, user.password);
-        
-        if (!passwordMatch) return res.json({error: `Wrong credentials`}).status(400);
+        const result = await getUser(email);
 
-        const token = generateToken(user);
-        user.password = "";
+        if (!result) return res.json({ error: `User with email ${email} not found` }).status(404);
 
-        return res.send({user, token});
+        const passwordMatch = compareSync(password, result.password);
+
+        if (!passwordMatch) return res.json({ error: `Wrong credentials` }).status(400);
+
+        const token = generateToken(result);
+        result.password = "";
+
+        return res.send({ result, token });
 
     } catch (error) {
         next(error);

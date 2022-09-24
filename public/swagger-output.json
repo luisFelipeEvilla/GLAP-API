@@ -1,36 +1,33 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
+    "version": "0.1.0",
     "title": "GLAP API",
-    "description": "GLAP API documentation",
-    "version": "1.0.0"
+    "description": "GLAP API documentation"
   },
-  "host": "http://localhost:3001",
-  "basePath": "/",
-  "schemes": [
-    "http"
-  ],
   "paths": {
     "/auth/signup": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
           }
         }
       }
@@ -38,23 +35,27 @@
     "/auth/signin": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -66,12 +67,16 @@
           {
             "name": "index",
             "in": "query",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "offset",
             "in": "query",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -82,23 +87,25 @@
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "report": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/report"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/report"
+              }
+            }
           }
         }
       }
@@ -111,7 +118,9 @@
             "name": "_id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -127,24 +136,29 @@
             "name": "_id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "report": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/report"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/report"
+              }
+            }
           }
         }
       }
@@ -157,24 +171,29 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "confirmation": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportConfirmation"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/reportConfirmation"
+              }
+            }
           }
         }
       }
@@ -187,13 +206,17 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "_idConfirmation",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -211,24 +234,29 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "solutionated": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportSolutionated"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/reportSolutionated"
+              }
+            }
           }
         }
       }
@@ -241,13 +269,17 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "_idsolutionated",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -255,6 +287,190 @@
             "description": "OK"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a1233"
+          },
+          "name": {
+            "type": "string",
+            "example": "jhon Doe"
+          },
+          "identification_number": {
+            "type": "string",
+            "example": "1234567891"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhon.doe@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "jhon"
+          },
+          "role": {
+            "type": "object",
+            "properties": {
+              "0": {
+                "type": "string",
+                "example": "enterprise"
+              },
+              "1": {
+                "type": "string",
+                "example": "person"
+              },
+              "enterprise": {
+                "type": "number",
+                "example": 0
+              },
+              "person": {
+                "type": "number",
+                "example": 1
+              }
+            }
+          },
+          "provider_type": {
+            "type": "object",
+            "properties": {
+              "0": {
+                "type": "string",
+                "example": "gas"
+              },
+              "1": {
+                "type": "string",
+                "example": "electricity"
+              },
+              "2": {
+                "type": "string",
+                "example": "cliff"
+              },
+              "gas": {
+                "type": "number",
+                "example": 0
+              },
+              "electricity": {
+                "type": "number",
+                "example": 1
+              },
+              "cliff": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "user"
+        }
+      },
+      "report": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a1233"
+          },
+          "user": {
+            "type": "string",
+            "example": "jhon Doe"
+          },
+          "provider": {
+            "type": "string",
+            "example": "american gas"
+          },
+          "description": {
+            "type": "string",
+            "example": "bad service"
+          },
+          "geolocation": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "Point"
+              },
+              "coordinates": {
+                "type": "array",
+                "example": [
+                  -73.856077,
+                  40.848447
+                ],
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2022-09-24T23:02:57.153Z"
+          },
+          "visibleAt": {
+            "type": "string",
+            "example": "2022-09-24T23:02:57.153Z"
+          }
+        },
+        "xml": {
+          "name": "report"
+        }
+      },
+      "reportConfirmation": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c221232303"
+          },
+          "user": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a154"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2022-09-24T23:02:57.153Z"
+          }
+        },
+        "xml": {
+          "name": "reportConfirmation"
+        }
+      },
+      "reportSolutionated": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a154"
+          },
+          "user": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a1233"
+          },
+          "provider": {
+            "type": "string",
+            "example": "632e1c7a56c75874e0c6a1445"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2022-09-24T23:02:57.153Z"
+          }
+        },
+        "xml": {
+          "name": "reportSolutionated"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

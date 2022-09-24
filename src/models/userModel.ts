@@ -3,6 +3,9 @@ import { ObjectId } from "mongoose";
 import { providerTypes, roles } from "../db/enums";
 
 export class User {
+    constructor(_id: any, name: any) {
+
+    }
     public _id?: ObjectId;
     
     @prop({ required: true })
