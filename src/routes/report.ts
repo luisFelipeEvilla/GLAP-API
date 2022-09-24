@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { createReport, createReportSolucionated, deleteReports, getReports, updateReports } from '../controllers/reportController';
+import { createReport, createReportSolucionated, deleteReports, deleteReportSolucionated, getReports, updateReports } from '../controllers/reportController';
 import { Report } from '../models/report/reportModel';
 import { ReportSolutionated } from '../models/report/reportSolucionated';
 
@@ -28,6 +28,18 @@ router.post('/:_id/solutionated', async (req: Request, res: Response, next: Next
         next(error);
     }
 });
+
+router.delete('/:_id/solutionated/:_idsolutionated', async (req, res, next) => {
+    const { _idsolutionated } = req.params;
+
+    try {
+        const result = await deleteReportSolucionated({_id: _idsolutionated});
+        
+        res.json(result).status(200);
+    } catch (error) {
+        next(error);
+    }
+})
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     const {...report} = req.body as Report;
