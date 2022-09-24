@@ -4,7 +4,7 @@ import { User } from "./userModel";
 
 @ModelOptions({options: {allowMixed: Severity.ALLOW}})
 export class Report {
-    _id?: ObjectId
+    _id!: ObjectId
 
     @prop({ ref: () => User, required: true})
     public user!: Ref<User>;

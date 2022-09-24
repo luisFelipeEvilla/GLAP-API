@@ -1,4 +1,5 @@
 import { genSaltSync, hashSync } from 'bcrypt';
+import { ObjectId } from 'mongoose';
 
 import connect from "../db";
 import { ResourceAlreadyExistsError } from "../Errors/errors";
@@ -32,4 +33,16 @@ export const getUser = async (email: String): Promise<User | null> => {
     const found: User | null = await userModel.findOne({ email });
 
     return found;
+}
+
+export const getUserById = async (_id : ObjectId | String) => {
+    try {
+        await connect();
+
+        const user = await userModel.findOne({ _id });
+
+        return user;
+    } catch (error) {
+        throw error;
+    }
 }
