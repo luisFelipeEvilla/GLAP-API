@@ -6,7 +6,7 @@ import { getReportConfirmations } from "./reportConfirmationController";
 
 connect();
 
-export const getReports = async (filters = {}, index: number, offset = DEFAULT_OFFSET) => {
+export const getReports = async (filters = {}, index: number, offset = DEFAULT_OFFSET as number) => {
     try {
         const result = await reportModel.find(filters).skip(index * offset).limit(offset);
         

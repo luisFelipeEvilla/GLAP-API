@@ -40,5 +40,5 @@ DEFAULT_OFFSET = 25
 for deploy your application, only need to run the following command
 
 ```bash
-npm run
+npm start
 ```
