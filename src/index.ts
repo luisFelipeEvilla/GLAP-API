@@ -5,13 +5,15 @@ import signup from './routes/auth';
 import reports from './routes/report';
 
 import { SERVER_PORT } from "./config";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({
     extended: true
-}))
+}));
+app.use(errorHandler);
 
 app.use('/auth', signup);
 app.use('/reports', reports);

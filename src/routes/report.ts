@@ -1,24 +1,20 @@
-import express, { Request, Response } from 'express';
-import { Error as mongooseError } from "mongoose";
+import express, { NextFunction, Request, Response } from 'express';
 import { createReport, deleteReports, getReports, updateReports } from '../controllers/reportController';
 import { Report } from '../models/reportModel';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await getReports({});
 
         res.json(result);
     } catch (error) {
-        if (error instanceof mongooseError ) return  res.json(error).status(400)
-        if (error instanceof Error) return res.json({error: error.message}).status(500);
-
-        console.error(error);
+        next(error);
     }
 })
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     const {...report} = req.body as Report;
 
     try {
@@ -26,14 +22,11 @@ router.post('/', async (req: Request, res: Response) => {
 
         res.json(result).status(200);
     } catch (error) {
-        if (error instanceof mongooseError ) return  res.json(error).status(400)
-        if (error instanceof Error) return res.json({error: error.message}).status(500);
-
-        console.error(error);
+        next(error);
     }
 });
 
-router.delete('/:_id', async (req, res) => {
+router.delete('/:_id', async (req: Request, res: Response, next: NextFunction) => {
     const { _id } = req.params;
 
     if (!_id || _id === null) return res.json({ error: 'Should pass a _id parameter'});
@@ -43,14 +36,11 @@ router.delete('/:_id', async (req, res) => {
 
         res.json(`Report with id: ${_id} deleted successfully`).status(200);
     } catch (error) {
-        if (error instanceof mongooseError ) return  res.json(error).status(400)
-        if (error instanceof Error) return res.json({error: error.message}).status(500);
-
-        console.error(error);
+        next(error);
     }
 })
 
-router.patch('/:_id', async (req, res) => {
+router.patch('/:_id', async (req: Request, res: Response, next: NextFunction) => {
     const { _id } = req.params;
     const { ...report } = req.body as Report;
 
@@ -61,10 +51,7 @@ router.patch('/:_id', async (req, res) => {
 
         res.json(result).status(200);
     } catch (error) {
-        if (error instanceof mongooseError ) return  res.json(error).status(400)
-        if (error instanceof Error) return res.json({error: error.message}).status(500);
-
-        console.error(error);
+        next(error);
     }
 })
 export default router;
