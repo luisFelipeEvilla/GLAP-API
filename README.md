@@ -1,4 +1,4 @@
-# GLAP-API
+# GLAPP-API
 
 A backend service for public services breakdowns
 
