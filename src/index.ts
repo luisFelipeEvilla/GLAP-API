@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import signup from './routes/auth';
 import reports from './routes/reports/report';
 
-import { SERVER_BASE_URL, SERVER_PORT } from "./config";
+import { SERVER_BASE_URL, PORT } from "./config";
 import { errorHandler } from "./middlewares/errorHandler";
 import verifyToken from "./middlewares/auth";
 
@@ -30,6 +30,6 @@ app.use('/auth', signup);
 app.use('/reports', verifyToken ,reports);
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-app.listen(SERVER_PORT, () => {
-    console.log(chalk.green(`Server listening on ${SERVER_BASE_URL}:${SERVER_PORT}`));
+app.listen(PORT, () => {
+    console.log(chalk.green(`Server listening on ${SERVER_BASE_URL}:${PORT}`));
 });
