@@ -7,9 +7,10 @@ const connect = async () => {
     try {
         await mongoose.connect(DB_URI);
     } catch (error) {
-        chalk.red(`Database connection error \n ${error}`);
+        console.error(chalk.red(`Database connection error \n ${error}`));
         process.exit(1)
     }
 }
+
 
 export default connect;

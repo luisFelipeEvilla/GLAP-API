@@ -14,7 +14,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const { index , offset} = req.query as { index: string, offset: string};
     
     try {
-        const result = await getReports({}, parseInt(index), offset ? parseInt(offset) : undefined);
+        const result = await getReports({visible: true}, parseInt(index), offset ? parseInt(offset) : undefined);
 
         res.json(result);
     } catch (error) {
