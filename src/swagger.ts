@@ -1,5 +1,5 @@
 import swaggerAutogen from 'swagger-autogen';
-import { SERVER_BASE_URL, SERVER_PORT } from './config';
+import { SERVER_BASE_URL, PORT } from './config';
 import { providerTypes, roles } from './db/enums';
 
 const doc = {
@@ -15,7 +15,7 @@ const doc = {
       bearerFormat: 'JWT'
     }
   },
-  host: `${SERVER_BASE_URL}:${SERVER_PORT}`,
+  host: `${SERVER_BASE_URL}:${PORT}`,
   schemes: ['http'],
   definitions: {
     user: {
