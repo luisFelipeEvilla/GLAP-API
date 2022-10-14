@@ -18,6 +18,9 @@ export class Report {
     @prop({ required: true})
     public geolocation!: GeoJSON.GeoJSON;
 
+    @prop({ default: true})
+    public visible!: boolean;
+
     @prop({ default: Date.now()}, )
     public createdAt!: Date;
 
