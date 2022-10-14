@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/swagger.ts",
+    "start": "node build/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build",
+    "gen-doc": "ts-node ./src/swagger.ts",
     "dev": "nodemon ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
