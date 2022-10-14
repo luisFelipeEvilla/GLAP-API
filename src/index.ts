@@ -1,5 +1,6 @@
 import express from "express";
 import chalk from "chalk";
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 
 import signup from './routes/auth';
@@ -13,6 +14,9 @@ const swaggerFile = require('../public/swagger-output.json');
 
 const app = express();
 
+app.use(cors({
+    origin: '*'
+}))
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
