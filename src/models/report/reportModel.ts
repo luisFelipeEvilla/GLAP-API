@@ -16,7 +16,10 @@ export class Report {
     public description!: string;
     
     @prop({ required: true})
-    public geolocation!: GeoJSON.GeoJSON;
+    public lat!: Number
+
+    @prop({ required: true})
+    public lng!: Number
 
     @prop({ default: true})
     public visible!: boolean;
