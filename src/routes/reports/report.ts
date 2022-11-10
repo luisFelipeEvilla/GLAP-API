@@ -30,7 +30,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await createReport(report);
 
-        res.json(result).status(200);
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }
