@@ -30,11 +30,11 @@ router.post('/signin', async (req: Request, res: Response, next: NextFunction) =
     try {
         const result = await getUser(email);
 
-        if (!result) return res.json({ error: `User with email ${email} not found` }).status(404);
+        if (!result) return res.status(404).json({ error: `User with email ${email} not found` });
 
         const passwordMatch = compareSync(password, result.password);
 
-        if (!passwordMatch) return res.json({ error: `Wrong credentials` }).status(400);
+        if (!passwordMatch) return res.status(400).json({ error: `Wrong credentials` });
 
         const token = generateToken(result);
         result.password = "";

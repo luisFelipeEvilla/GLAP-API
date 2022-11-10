@@ -12,7 +12,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await createReportConfirmation(confirmation);
 
-        res.json(result).status(200);
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }
@@ -24,7 +24,7 @@ router.delete('/:_idConfirmation', async (req, res, next) => {
     try {
         const result = await deleteReportConfirmation({_id: _idConfirmation});
         
-        res.json(result).status(200);
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }

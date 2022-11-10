@@ -11,7 +11,7 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await createReportSolucionated(solutionated);
 
-        res.json(result).status(200);
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }
@@ -24,7 +24,7 @@ router.delete('/:_idsolutionated', async (req, res, next) => {
     try {
         const result = await deleteReportSolucionated({_id: _idsolutionated});
 
-        res.json(result).status(200);
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }
