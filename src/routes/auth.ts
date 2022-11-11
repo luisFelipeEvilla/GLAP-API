@@ -1,6 +1,7 @@
 import { compareSync } from "bcrypt";
 import express, { NextFunction, Request, Response } from "express";
 import { addUser, getUser } from "../controllers/userController";
+import { ResourceAlreadyExistsError } from "../Errors/errors";
 import { User } from "../models/userModel";
 import generateToken from "../utils/generateJWT";
 
@@ -20,6 +21,7 @@ router.post('/signup', async (req: Request, res: Response, next: NextFunction) =
 
         res.json({ result, token }).status(200);
     } catch (error) {
+        if (error instanceof ResourceAlreadyExistsError) return res.status(400).json({ error: error.message }); 
         next(error);
     }
 })
