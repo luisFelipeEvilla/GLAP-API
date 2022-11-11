@@ -8,6 +8,7 @@ import reports from './routes/reports/report';
 import { SERVER_BASE_URL, PORT } from "./config";
 import { errorHandler } from "./middlewares/errorHandler";
 import verifyToken from "./middlewares/auth";
+import providers from "./routes/users/providers";
 
 const swaggerFile = require('../public/swagger-output.json');
 const cors = require('cors');
@@ -27,6 +28,7 @@ app.use(express.urlencoded({
 app.use(errorHandler);
 
 app.use('/auth', signup);
+app.use('/providers', verifyToken, providers);
 app.use('/reports', verifyToken ,reports);
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
