@@ -5,6 +5,6 @@ export enum roles {
 
 export enum providerTypes {
     "gas",
-    "electricity",
-    "cliff"
+    "cliff",
+    "electricity"
 }
