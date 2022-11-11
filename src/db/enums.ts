@@ -8,3 +8,10 @@ export enum providerTypes {
     "cliff",
     "electricity"
 }
+
+export enum reportState {
+    "published",
+    "pending",
+    "solved",
+    "reject"
+}

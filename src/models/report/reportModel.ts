@@ -1,5 +1,6 @@
 import { getModelForClass, ModelOptions, prop, Ref, Severity } from "@typegoose/typegoose";
 import  { ObjectId } from "mongoose";
+import { reportState } from "../../db/enums";
 import { User } from "../userModel";
 
 @ModelOptions({options: {allowMixed: Severity.ALLOW}})
@@ -29,6 +30,9 @@ export class Report {
 
     @prop({ default: Date.now() })
     public visibleAt!: Date;
+
+    @prop({ default: reportState.published })
+    public state!: reportState;
 }
 
 const reportModel = getModelForClass(Report);
