@@ -4,6 +4,7 @@ import { DEFAULT_OFFSET } from "../../config";
 import { getReportSolucionateds } from "./reportSolutionatedController";
 import { getReportConfirmations } from "./reportConfirmationController";
 import userModel from "../../models/userModel";
+import { getReportState } from "./reportStateController";
 
 connect();
 
@@ -16,6 +17,7 @@ export const getReports = async (filters = {}, index: number = 0, offset = DEFAU
         for await (const report of reports) {
             report.reportConfirmations = await getReportConfirmations(report._id);
             report.reportSolutionateds = await getReportSolucionateds(report._id);
+            report.states = await getReportState(report._id);
         }
 
         return reports;
@@ -53,7 +55,7 @@ export const deleteReports = async (filters: {}) => {
     }
 }
 
-export const updateReports = async (filters: {}, report: Report) => {
+export const updateReports = async (filters: {}, report: any) => {
     try {
         const result = await reportModel.updateMany(filters, report);
 
