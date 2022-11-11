@@ -8,7 +8,7 @@ connect();
 
 export const getReports = async (filters = {}, index: number = 0, offset = DEFAULT_OFFSET as number) => {
     try {
-        const result = await reportModel.find(filters).skip(index * offset).limit(offset);
+        const result = await reportModel.find(filters);
         
         const reports  = JSON.parse(JSON.stringify(result));
 
