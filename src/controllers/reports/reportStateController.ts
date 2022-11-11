@@ -2,7 +2,7 @@ import ReportStateModel, { ReportState } from "../../models/report/reportState";
 import { updateReports } from "./reportController";
 
 
-export const createReportState = async (state: ReportState) => {
+export const createReportState = async (state: ReportState | any) => {
     try {
         const result = await ReportStateModel.create(state);
 

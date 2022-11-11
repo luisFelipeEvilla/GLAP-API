@@ -1,6 +1,9 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { createReport, deleteReports, getReports, updateReports } from '../../controllers/reports/reportController';
+import { createReportState } from '../../controllers/reports/reportStateController';
+import { reportState } from '../../db/enums';
 import { Report } from '../../models/report/reportModel';
+import { ReportState } from '../../models/report/reportState';
 
 import confirmation from './reportConfirmation'; 
 import solutionated from './reportSolutionated';
@@ -43,7 +46,17 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     const {...report} = req.body as Report;
 
     try {
-        const result = await createReport(report);
+        const result = await createReport(report) as Report;
+        
+        const state = {
+            provider: report.provider,
+            report: result._id,
+            state: reportState.published,
+            comment: 'Reporte creado',
+            createdAt: new Date()
+        } 
+
+        await createReportState(state);
 
         res.status(200).json(result);
     } catch (error) {
