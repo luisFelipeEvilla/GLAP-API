@@ -1,18 +1,24 @@
 import { getModelForClass, ModelOptions, prop, Ref, Severity } from "@typegoose/typegoose";
 import  { ObjectId } from "mongoose";
-import { reportState } from "../../db/enums";
+import { providerTypes, reportState } from "../../db/enums";
 import { User } from "../userModel";
 
 @ModelOptions({options: {allowMixed: Severity.ALLOW}})
 export class Report {
     _id!: ObjectId
-
+    
     @prop({ ref: () => User, required: true})
     public user!: Ref<User>;
     
     @prop({ ref: () => User, required: true})
     public provider!: Ref<User>;
     
+    @prop({ required: true })
+    public type!: providerTypes;
+
+    @prop({ required: true })
+    public title!: string;
+
     @prop({ required: true})
     public description!: string;
     

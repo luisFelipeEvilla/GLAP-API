@@ -3,6 +3,7 @@ import reportModel, { Report } from "../../models/report/reportModel";
 import { DEFAULT_OFFSET } from "../../config";
 import { getReportSolucionateds } from "./reportSolutionatedController";
 import { getReportConfirmations } from "./reportConfirmationController";
+import userModel from "../../models/userModel";
 
 connect();
 
@@ -26,8 +27,14 @@ export const getReports = async (filters = {}, index: number = 0, offset = DEFAU
 
 export const createReport = async (report: Report) => {
     try {
-        const result = await reportModel.create(report);
+        const provider = await userModel.findOne({ _id: report.provider });
+        
+        if (!provider) throw new Error("Error, provider not found");
 
+        report.type = provider.provider_type;
+
+        const result = await reportModel.create(report) as Report;
+    
         if (!result) throw new Error(`Error creating report`);
 
         return result;
