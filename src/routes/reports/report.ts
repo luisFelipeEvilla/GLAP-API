@@ -22,6 +22,19 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     }
 })
 
+router.get('/provider/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const { index , offset} = req.query as { index: string, offset: string};
+    const { id } = req.params;
+    
+    try {
+        const result = await getReports({visible: true, provider: id}, parseInt(index), offset ? parseInt(offset) : undefined);
+
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+})
+
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     /* #swagger.requestBody = { required: true, schema: { $ref: "#/definitions/report" } } */
 
