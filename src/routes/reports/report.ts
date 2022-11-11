@@ -4,9 +4,11 @@ import { Report } from '../../models/report/reportModel';
 
 import confirmation from './reportConfirmation'; 
 import solutionated from './reportSolutionated';
+import state from './reportState';
 
 const router = express.Router();
 
+router.use('/:id/state', state);
 router.use('/:id/confirmation', confirmation );
 router.use('/:id/solutionated', solutionated );
 
